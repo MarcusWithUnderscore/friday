@@ -1,5 +1,9 @@
 import { useRef, useState } from "react";
 import "./App.scss";
+
+import { Canvas } from "@react-three/fiber";
+import { Experience } from "./components/Experience";
+
 import { LiveAPIProvider } from "./contexts/LiveAPIContext";
 import SidePanel from "./components/side-panel/SidePanel";
 import { Altair } from "./components/altair/Altair";
@@ -32,6 +36,10 @@ function App() {
           <main>
             <div className="main-app-area">
               {/* APP goes here */}
+              <Canvas shadows camera={{ position: [3, 3, 3], fov: 30 }}>
+                <color attach="background" args={["#ececec"]} />
+                <Experience />
+              </Canvas>
               <Altair />
               <video
                 className={cn("stream", {
