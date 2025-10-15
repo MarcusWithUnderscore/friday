@@ -2,7 +2,7 @@ import './button.css';
 import { useState } from 'react';
 import SidePanel from '../side-panel/SidePanel.tsx';
 
-function Button() {
+function Button({ onZoomIn, onZoomOut }) {
     const [showPanel, setShowPanel] = useState(false);
 
     const handleClick = () => {
@@ -13,10 +13,28 @@ function Button() {
         }
     };
 
+    const handleZoomIn = () => {
+        console.log('Zoom in clicked');
+        window.dispatchEvent(new CustomEvent('avatarZoom', { detail: { zoom: -0.5 } }));
+    };
+
+    const handleZoomOut = () => {
+        console.log('Zoom out clicked');
+        window.dispatchEvent(new CustomEvent('avatarZoom', { detail: { zoom: 0.5 } }));
+    };
+
     return (
         <>
             <button className="chat-button" onClick={handleClick}>
                 <span className="material-icons">{showPanel ? 'close' : 'chat'}</span>
+            </button>
+            
+            <button className="zoom-button zoom-in" onClick={handleZoomIn}>
+                <span className="material-icons">zoom_in</span>
+            </button>
+            
+            <button className="zoom-button zoom-out" onClick={handleZoomOut}>
+                <span className="material-icons">zoom_out</span>
             </button>
             
             <SidePanel />

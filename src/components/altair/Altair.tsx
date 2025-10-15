@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState, memo } from "react";
 import vegaEmbed from "vega-embed";
 import { useLiveAPIContext } from "../../contexts/LiveAPIContext";
@@ -11,6 +12,7 @@ import {
 // ============================================
 // STEP 1: IMPORT YOUR FUNCTIONS
 // ============================================
+
 import { 
   allFunctionDeclarations,
   handleFunctionCall 
@@ -19,6 +21,7 @@ import {
 // ============================================
 // ALTAIR GRAPH DECLARATION (Keep this)
 // ============================================
+
 const renderAltairDeclaration: FunctionDeclaration = {
   name: "render_altair",
   description: "Displays an altair graph in json format.",
@@ -54,7 +57,8 @@ function AltairComponent() {
       systemInstruction: {
         parts: [
           {
-            text: `You are Friday. You have access to various functions including:
+            text: `
+            - You are AFRI, You have access to various functions including:
             - render_altair: for creating graphs and charts
             - get_weather: for checking weather
             - calculate: for math operations
@@ -68,7 +72,7 @@ function AltairComponent() {
             Try to very kind as much as possible and helpful
             - You have the capability of speaking many languages but always address people in English, no matter what languge they speak
             
-            Use these functions when appropriate. Don't ask for additional information, make your best judgement. 
+            - Use these functions when appropriate. Don't ask for additional information, make your best judgement. 
             Always refer to me as sir or boss.`,
           },
         ],
@@ -78,7 +82,7 @@ function AltairComponent() {
         { 
           functionDeclarations: [
             renderAltairDeclaration,
-            ...allFunctionDeclarations, // ← Add all imported functions
+            ...allFunctionDeclarations, 
           ] 
         },
       ],
