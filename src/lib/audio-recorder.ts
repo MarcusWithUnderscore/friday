@@ -53,19 +53,19 @@ export class AudioRecorder extends EventEmitter {
     this.starting = new Promise(async (resolve, reject) => {
       try {
         // Request microphone with echo cancellation and noise suppression
-        this.stream = await navigator.mediaDevices.getUserMedia({ 
+        this.stream = await navigator.mediaDevices.getUserMedia({
           audio: {
-            echoCancellation: true,        // Filters out sounds from speakers
-            noiseSuppression: true,        // Reduces background noise
-            autoGainControl: true,         // Normalizes volume levels
-            sampleRate: this.sampleRate,   // Match our target sample rate
-          } 
+            echoCancellation: true, // Filters out sounds from speakers
+            noiseSuppression: true, // Reduces background noise
+            autoGainControl: true, // Normalizes volume levels
+            sampleRate: this.sampleRate, // Match our target sample rate
+          },
         });
 
         // Log the actual constraints applied (for debugging)
         const audioTrack = this.stream.getAudioTracks()[0];
         const settings = audioTrack.getSettings();
-        console.log('Audio Track Settings:', {
+        console.log("Audio Track Settings:", {
           echoCancellation: settings.echoCancellation,
           noiseSuppression: settings.noiseSuppression,
           autoGainControl: settings.autoGainControl,
@@ -81,7 +81,7 @@ export class AudioRecorder extends EventEmitter {
         await this.audioContext.audioWorklet.addModule(src);
         this.recordingWorklet = new AudioWorkletNode(
           this.audioContext,
-          workletName,
+          workletName
         );
 
         this.recordingWorklet.port.onmessage = async (ev: MessageEvent) => {
@@ -98,7 +98,7 @@ export class AudioRecorder extends EventEmitter {
         // vu meter worklet
         const vuWorkletName = "vu-meter";
         await this.audioContext.audioWorklet.addModule(
-          createWorketFromSrc(vuWorkletName, VolMeterWorket),
+          createWorketFromSrc(vuWorkletName, VolMeterWorket)
         );
         this.vuWorklet = new AudioWorkletNode(this.audioContext, vuWorkletName);
         this.vuWorklet.port.onmessage = (ev: MessageEvent) => {
@@ -135,3 +135,5 @@ export class AudioRecorder extends EventEmitter {
     handleStop();
   }
 }
+
+//nothing is up to date
