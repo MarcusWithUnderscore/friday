@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+canvas{
+  background-color: aqua;
+  position: relative;
+  left: 30%;
+  width: 100%;
+}
